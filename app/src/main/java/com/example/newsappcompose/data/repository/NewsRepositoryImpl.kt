@@ -14,8 +14,7 @@ class NewsRepositoryImpl(
     private val newsApi: NewsApi
 ) : NewsRepository {
 
-    override suspend fun getNews(sources: List<String>): Flow<PagingData<Article>> {
-
+    override  fun getNews(sources: List<String>): Flow<PagingData<Article>> {
         return Pager(
             config = PagingConfig(pageSize = 10),
             pagingSourceFactory = {

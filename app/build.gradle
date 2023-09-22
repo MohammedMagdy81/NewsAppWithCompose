@@ -86,6 +86,10 @@ dependencies {
 
     implementation "androidx.paging:paging-runtime:3.0.0-alpha12"
     //implementation "androidx.paging:paging-compose:1.0.0-alpha20"
+    implementation "androidx.paging:paging-compose:1.0.0-alpha17"
+
+    // coil
+    implementation "io.coil-kt:coil-compose:2.0.0"
 
     //Splash Api
     implementation "androidx.core:core-splashscreen:1.0.1"

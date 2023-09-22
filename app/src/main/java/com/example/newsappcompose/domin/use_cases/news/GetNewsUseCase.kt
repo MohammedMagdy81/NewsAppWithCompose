@@ -9,6 +9,6 @@ class GetNewsUseCase(
     private val newsRepository: NewsRepository
 ) {
 
-    suspend operator fun invoke(sources: List<String>): Flow<PagingData<Article>> =
+     operator fun invoke(sources: List<String>): Flow<PagingData<Article>> =
         newsRepository.getNews(sources)
 }
