@@ -1,8 +1,12 @@
 package com.example.newsappcompose.domin.model
 
 
+import androidx.annotation.NonNull
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity
 data class Article(
     @SerializedName("author")
     var author: String?,
@@ -16,8 +20,10 @@ data class Article(
     var source: Source?,
     @SerializedName("title")
     var title: String?,
+
     @SerializedName("url")
-    var url: String?,
+    @NonNull
+    @PrimaryKey var url: String,
     @SerializedName("urlToImage")
     var urlToImage: String?
 )
