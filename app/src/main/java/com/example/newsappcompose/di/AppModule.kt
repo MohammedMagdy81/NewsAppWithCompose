@@ -13,19 +13,15 @@ import com.example.newsappcompose.domin.repository.NewsRepository
 import com.example.newsappcompose.domin.use_cases.appentry.AppEntryUseCases
 import com.example.newsappcompose.domin.use_cases.appentry.ReadAppEntry
 import com.example.newsappcompose.domin.use_cases.appentry.SaveAppEntry
-import com.example.newsappcompose.domin.use_cases.news.GetNewsUseCase
-import com.example.newsappcompose.domin.use_cases.news.NewsUseCases
-import com.example.newsappcompose.domin.use_cases.news.SearchNewsUseCase
+import com.example.newsappcompose.domin.use_cases.news.*
 import com.example.newsappcompose.utils.Constants.BASE_URL
 import com.example.newsappcompose.utils.Constants.NEWS_DATABASE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -45,13 +41,6 @@ object AppModule {
             saveAppEntry = SaveAppEntry(localUserManager),
             readAppEntry = ReadAppEntry(localUserManager)
         )
-
-    @Provides
-    @Singleton
-    fun provideNewsUseCases(newsRepository: NewsRepository) = NewsUseCases(
-        getNewsUseCase = GetNewsUseCase(newsRepository),
-        searchNewsUseCase = SearchNewsUseCase(newsRepository)
-    )
 
     @Provides
     @Singleton
@@ -86,6 +75,21 @@ object AppModule {
     @Provides
     @Singleton
     fun newsDao(newsDatabase: NewsDatabase): ArticlesDao = newsDatabase.newsDao()
+
+    @Provides
+    @Singleton
+    fun provideNewsUseCase(
+        newsRepository: NewsRepository,
+        newsDao: ArticlesDao
+    ) = NewsUseCases(
+        getNewsUseCase = GetNewsUseCase(newsRepository),
+        searchNewsUseCase = SearchNewsUseCase(newsRepository),
+        upsertArticleUseCase = UpsertArticleUseCase(newsDao),
+        selectArticleUseCase = SelectArticleUseCase(newsDao),
+        deleteArticleUseCase = DeleteArticleUseCase(newsDao),
+        selectArticlesUseCase = SelectArticlesUseCase(newsDao)
+    )
+
 }
 
 

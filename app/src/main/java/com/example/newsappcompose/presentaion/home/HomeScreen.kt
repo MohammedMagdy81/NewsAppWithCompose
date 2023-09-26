@@ -7,23 +7,26 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.remember
-import androidx.paging.compose.LazyPagingItems
-import com.example.newsappcompose.domin.model.Article
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.paging.compose.LazyPagingItems
 import com.example.newsappcompose.R
+import com.example.newsappcompose.domin.model.Article
 import com.example.newsappcompose.presentaion.common.ArticleList
 import com.example.newsappcompose.presentaion.common.SearchBar
-import com.example.newsappcompose.presentaion.navgraph.Route
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HomeScreen(articles: LazyPagingItems<Article>, navigation: (String) -> Unit) {
+fun HomeScreen(
+    articles: LazyPagingItems<Article>,
+    navigateToSearch: () -> Unit,
+    navigateToDetails: (Article) -> Unit
+) {
     val title by remember {
         derivedStateOf {
             if (articles.itemCount > 10) {
@@ -58,7 +61,7 @@ fun HomeScreen(articles: LazyPagingItems<Article>, navigation: (String) -> Unit)
             readOnly = true,
             onValueChange = {},
             onClick = {
-                navigation(Route.SearchScreen.route)
+                navigateToSearch()
             },
             onSearch = {
 
@@ -78,7 +81,7 @@ fun HomeScreen(articles: LazyPagingItems<Article>, navigation: (String) -> Unit)
             modifier = Modifier.padding(horizontal = 20.dp),
             articles = articles,
             onArticleClick = {
-                navigation(Route.DetailsScreen.route)
+              navigateToDetails(it)
             })
 
     }

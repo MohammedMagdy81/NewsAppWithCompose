@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.example.newsappcompose.domin.model.Article
 import com.example.newsappcompose.presentaion.common.ArticleList
 import com.example.newsappcompose.presentaion.common.SearchBar
 import com.example.newsappcompose.presentaion.navgraph.Route
@@ -13,7 +14,7 @@ import com.example.newsappcompose.presentaion.navgraph.Route
 fun SearchScreen(
     state: SearchState,
     event: (SearchEvents) -> Unit,
-    navigate: (String) -> Unit
+    navigateToDetails: (Article) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -32,7 +33,7 @@ fun SearchScreen(
             val articles = it.collectAsLazyPagingItems()
             ArticleList(
                 articles = articles,
-                onArticleClick = { navigate(Route.DetailsScreen.route) })
+                onArticleClick = { navigateToDetails(it) })
 
         }
     }

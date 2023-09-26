@@ -23,7 +23,7 @@ import com.example.newsappcompose.domin.model.Article
 
 @Composable
 fun ArticleCard(
-    modifier: Modifier,
+    modifier: Modifier =Modifier,
     article: Article,
     onArticleClick: () -> Unit
 ) {

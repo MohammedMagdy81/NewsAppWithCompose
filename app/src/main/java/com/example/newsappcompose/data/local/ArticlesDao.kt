@@ -15,4 +15,7 @@ interface ArticlesDao {
 
     @Query("SELECT * FROM article")
     fun getAllArticles(): Flow<List<Article>>
+
+    @Query("SELECT *FROM Article WHERE url=:url")
+    suspend fun getArticle(url:String):Article?
 }

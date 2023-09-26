@@ -1,12 +1,15 @@
 package com.example.newsappcompose.domin.model
 
 
+import android.os.Parcelable
 import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 @Entity
+@Parcelize
 data class Article(
     @SerializedName("author")
     var author: String?,
@@ -26,4 +29,4 @@ data class Article(
     @PrimaryKey var url: String,
     @SerializedName("urlToImage")
     var urlToImage: String?
-)
+) : Parcelable

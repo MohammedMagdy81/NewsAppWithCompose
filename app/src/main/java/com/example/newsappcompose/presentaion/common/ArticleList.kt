@@ -11,6 +11,32 @@ import androidx.paging.compose.LazyPagingItems
 import com.example.newsappcompose.domin.model.Article
 
 @Composable
+fun ArticlesList(
+    modifier: Modifier = Modifier,
+    articles: List<Article>,
+    onClick: (Article) -> Unit
+) {
+    if (articles.isEmpty()){
+        EmptyScreen()
+    }
+    LazyColumn(
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(20.dp),
+        contentPadding = PaddingValues(all = 16.dp)
+    ) {
+        items(
+            count = articles.size,
+        ) {
+            articles[it]?.let { article ->
+                ArticleCard(article = article, onArticleClick = { onClick(article) })
+            }
+        }
+    }
+
+}
+
+
+@Composable
 fun ArticleList(
     modifier: Modifier = Modifier,
     articles: LazyPagingItems<Article>,

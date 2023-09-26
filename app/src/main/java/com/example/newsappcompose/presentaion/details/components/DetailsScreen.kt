@@ -43,7 +43,7 @@ fun DetailsScreen(
                 }
             },
             onBackBtnClick = navigateUp,
-            onBookmarkClick = { event(DetailsEvent.SaveArticleEvent) },
+            onBookmarkClick = { event(DetailsEvent.upsertDeleteArticle(article)) },
             onBrowseClick = {
                 Intent(Intent.ACTION_VIEW).also {
                     it.data = Uri.parse(article.url)
