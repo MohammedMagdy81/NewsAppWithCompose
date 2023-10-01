@@ -38,11 +38,11 @@ class DetailsViewModel @Inject constructor(
 
     private suspend fun deleteArticle(article: Article) {
         newsUseCases.deleteArticleUseCase.invoke(article)
-        sideEffect = "Article deleted"
+        sideEffect = "Article deleted !"
     }
 
     private suspend fun upsertArticle(article: Article) {
         newsUseCases.upsertArticleUseCase.invoke(article)
-        sideEffect = "Article inserted"
+        sideEffect = "Article Saved Successfully"
     }
 }

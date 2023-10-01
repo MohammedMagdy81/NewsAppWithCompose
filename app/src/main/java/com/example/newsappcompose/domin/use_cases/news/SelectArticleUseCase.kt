@@ -2,12 +2,13 @@ package com.example.newsappcompose.domin.use_cases.news
 
 import com.example.newsappcompose.data.local.ArticlesDao
 import com.example.newsappcompose.domin.model.Article
+import com.example.newsappcompose.domin.repository.NewsRepository
 
 class SelectArticleUseCase(
-    private val newsDao: ArticlesDao
+    private val newsRepository: NewsRepository
 ) {
     suspend operator fun invoke(url: String): Article? =
-        newsDao.getArticle(url)
+        newsRepository.getArticle(url)
 
 
 }
